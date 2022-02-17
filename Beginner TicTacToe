@@ -1,0 +1,146 @@
+import random
+
+print("\nWelcome to TikTacToe!\n")
+
+grid_loc = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+your_turn = True
+turn_counter = 0
+
+
+def tictactoegame(turn, count):
+    print(grid_loc[0], " | ", grid_loc[1], " | ", grid_loc[2])
+    print(grid_loc[3], " | ", grid_loc[4], " | ", grid_loc[5])
+    print(grid_loc[6], " | ", grid_loc[7], " | ", grid_loc[8], "\n")
+
+    user_choice = "x"
+    bot_choice = "o"
+
+    if turn_counter == 9:
+        tie_game()
+
+    if grid_loc[0] == "x":
+        if grid_loc[1] and grid_loc[2] == "x":
+            win_game()
+        elif grid_loc[3] and grid_loc[6] == "x":
+            win_game()
+        elif grid_loc[4] and grid_loc[8] == "x":
+            win_game()
+    elif grid_loc[1] == "x" and grid_loc[4] == "x" and grid_loc[7] == "x":
+        win_game()
+    elif grid_loc[2] == "x":
+        if grid_loc[4] and grid_loc[6] == "x":
+            win_game()
+        elif grid_loc[5] and grid_loc[8] == "x":
+            win_game()
+    elif grid_loc[3] == "x" and grid_loc[4] == "x" and grid_loc[5] == "x":
+        win_game()
+    elif grid_loc[6] == "x" and grid_loc[7] == "x" and grid_loc[8] == "x":
+        win_game()
+
+    if grid_loc[0] == "o":
+        if grid_loc[1] and grid_loc[2] == "o":
+            lose_game()
+        elif grid_loc[3] and grid_loc[6] == "o":
+            lose_game()
+        elif grid_loc[4] and grid_loc[8] == "o":
+            lose_game()
+    elif grid_loc[1] == "o" and grid_loc[4] == "o" and grid_loc[7] == "o":
+        lose_game()
+    elif grid_loc[2] == "o":
+        if grid_loc[4] and grid_loc[6] == "o":
+            lose_game()
+        elif grid_loc[5] and grid_loc[8] == "o":
+            lose_game()
+    elif grid_loc[3] == "o" and grid_loc[4] == "o" and grid_loc[5] == "o":
+        lose_game()
+    elif grid_loc[6] == "o" and grid_loc[7] == "o" and grid_loc[8] == "o":
+        lose_game()
+
+    if turn:
+        try:
+            user_choice_picked = int(input("Pick a number: "))
+        except ValueError:
+            print("Enter a valid number.\n")
+            tictactoegame(turn, count)
+
+        if user_choice_picked == 1 and grid_loc[0] != "x" and grid_loc[0] != "o":
+            grid_loc[0] = user_choice
+            turn = False
+        elif user_choice_picked == 2 and grid_loc[1] != "x" and grid_loc[1] != "o":
+            grid_loc[1] = user_choice
+            turn = False
+        elif user_choice_picked == 3 and grid_loc[2] != "x" and grid_loc[2] != "o":
+            grid_loc[2] = user_choice
+            turn = False
+        elif user_choice_picked == 4 and grid_loc[3] != "x" and grid_loc[3] != "o":
+            grid_loc[3] = user_choice
+            turn = False
+        elif user_choice_picked == 5 and grid_loc[4] != "x" and grid_loc[4] != "o":
+            grid_loc[4] = user_choice
+            turn = False
+        elif user_choice_picked == 6 and grid_loc[5] != "x" and grid_loc[5] != "o":
+            grid_loc[5] = user_choice
+            turn = False
+        elif user_choice_picked == 7 and grid_loc[6] != "x" and grid_loc[6] != "o":
+            grid_loc[6] = user_choice
+            turn = False
+        elif user_choice_picked == 8 and grid_loc[7] != "x" and grid_loc[7] != "o":
+            grid_loc[7] = user_choice
+            turn = False
+        elif user_choice_picked == 9 and grid_loc[8] != "x" and grid_loc[8] != "o":
+            grid_loc[8] = user_choice
+            turn = False
+        else:
+            print("\nPICK A NUMBER BETWEEN 1 AND 9\n")
+    elif not turn:
+        bot_choice_picked = random.randint(1, 9)
+        print("The bot picked: ", bot_choice_picked)
+        if bot_choice_picked == 1 and grid_loc[0] != "x" and grid_loc[0] != "o":
+            grid_loc[0] = bot_choice
+            turn = True
+        elif bot_choice_picked == 2 and grid_loc[1] != "x" and grid_loc[1] != "o":
+            grid_loc[1] = bot_choice
+            turn = True
+        elif bot_choice_picked == 3 and grid_loc[2] != "x" and grid_loc[2] != "o":
+            grid_loc[2] = bot_choice
+            turn = True
+        elif bot_choice_picked == 4 and grid_loc[3] != "x" and grid_loc[3] != "o":
+            grid_loc[3] = bot_choice
+            turn = True
+        elif bot_choice_picked == 5 and grid_loc[4] != "x" and grid_loc[4] != "o":
+            grid_loc[4] = bot_choice
+            turn = True
+        elif bot_choice_picked == 6 and grid_loc[5] != "x" and grid_loc[5] != "o":
+            grid_loc[5] = bot_choice
+            turn = True
+        elif bot_choice_picked == 7 and grid_loc[6] != "x" and grid_loc[6] != "o":
+            grid_loc[6] = bot_choice
+            turn = True
+        elif bot_choice_picked == 8 and grid_loc[7] != "x" and grid_loc[7] != "o":
+            grid_loc[7] = bot_choice
+            turn = True
+        elif bot_choice_picked == 9 and grid_loc[8] != "x" and grid_loc[8] != "o":
+            grid_loc[8] = bot_choice
+            turn = True
+        else:
+            print("\nERROR WHEN BOT PICKED A NUMBER\n")
+
+    tictactoegame(turn, count)
+
+
+def tie_game():
+    print("The game has been tied!")
+    exit()
+
+
+def win_game():
+    print("You won!")
+    exit()
+
+
+def lose_game():
+    print("You lost!")
+    exit()
+
+
+tictactoegame(your_turn, turn_counter)
