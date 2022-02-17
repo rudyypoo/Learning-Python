@@ -1,0 +1,69 @@
+import random
+
+print("\nWelcome to Guess the Number!\n")
+
+
+def guess_the_number():
+    print("Enter two numbers.")
+
+    first_num = None
+    second_num = None
+    attempts_left = None
+    guessed_numbers = []
+
+    while first_num is None:
+        try:
+            first_num = int(input("Enter your first number: "))
+            if first_num <= 0:
+                print("\nValue must be above 0.\n")
+                first_num = None
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+
+    while second_num is None:
+        try:
+            second_num = int(input("Enter your second number: "))
+            if first_num >= second_num:
+                print("\n2nd number must be larger.\n")
+                second_num = None
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+
+    while attempts_left is None:
+        try:
+            attempts_left = int(input("How many attempts would you like: "))
+            if attempts_left <= 0:
+                print("\nValue must be above 0.\n")
+                attempts_left = None
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+
+    random_num = random.randint(first_num, second_num)
+    user_guess = None
+
+    while True:
+        try:
+            user_guess = int(input("Enter your guess between " + str(first_num) + " and " + str(second_num) + ": "))
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+
+        if user_guess == random_num:
+            print("You win!")
+            exit()
+        elif user_guess != random_num:
+            print("\nWrong answer!")
+        attempts_left -= 1
+        if attempts_left == 0:
+            print("You lose!")
+            print("The correct answer was: ", random_num)
+            exit()
+        if user_guess < random_num:
+            print("You need to guess higher!")
+        elif user_guess > random_num:
+            print("You need to guess lower!")
+        print("You have ", attempts_left, " guesses remaining.\n")
+        guessed_numbers.append(user_guess)
+        print("You have guessed: ", guessed_numbers)
+
+
+guess_the_number()
