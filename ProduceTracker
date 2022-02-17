@@ -1,0 +1,101 @@
+prices = {
+    "banana": 4,
+    "apple": 2,
+    "orange": 1.5,
+    "pear": 3
+}
+
+stock = {
+    "banana": 6,
+    "apple": 0,
+    "orange": 32,
+    "pear": 15
+}
+
+
+def menu():
+    user_choice = input("Would you like to go to the item list? (y or n): ")
+    if str(user_choice.lower()) == "y":
+        print()
+        list_items()
+    elif str(user_choice.lower()) == "n":
+        print()
+        print("Now closing")
+    else:
+        print()
+        print("ERROR")
+
+
+def list_items():
+    for key in prices:
+        print(key)
+        print("price: ", prices[key])
+        print("stock: ", stock[key])
+        print()
+    changes = input("Did anything change? (y or n): ")
+    if str(changes.lower()) == "y":
+        print()
+        item_changes()
+    elif str(changes.lower()) == "n":
+        print()
+        menu()
+    else:
+        print()
+        print("ERROR #2")
+
+
+def item_changes():
+    banana_count = stock["banana"]
+    apple_count = stock["apple"]
+    orange_count = stock["orange"]
+    pear_count = stock["pear"]
+    print("bananas: ", banana_count)
+    print("apples: ", apple_count)
+    print("oranges: ", orange_count)
+    print("pears: ", pear_count)
+    print()
+
+    changed_item = input("What item changed: ")
+    amount_changed = input("By how much: ")
+    add_sub = input("Up or down: ")
+    print()
+
+    if add_sub.lower() == "up":
+        if changed_item.lower() == "banana":
+            stock["banana"] = int(amount_changed) + stock["banana"]
+        elif changed_item.lower() == "apple":
+            stock["apple"] = int(amount_changed) + stock["apple"]
+        elif changed_item.lower() == "orange":
+            stock["orange"] = int(amount_changed) + stock["orange"]
+        elif changed_item.lower() == "pear":
+            stock["pear"] = int(amount_changed) + stock["pear"]
+        menu()
+
+    elif add_sub.lower() == "down":
+        if changed_item.lower() == "banana":
+            if stock["banana"] - int(amount_changed) < 0:
+                print("ERROR: Value cannot be below 0.")
+            else:
+                stock["banana"] = stock["banana"] - int(amount_changed)
+        elif changed_item.lower() == "apple":
+            if stock["apple"] - int(amount_changed) < 0:
+                print("ERROR: Value cannot be below 0.")
+            else:
+                stock["apple"] = stock["apple"] - int(amount_changed)
+        elif changed_item.lower() == "orange":
+            if stock["orange"] - int(amount_changed) < 0:
+                print("ERROR: Value cannot be below 0.")
+            else:
+                stock["orange"] = stock["orange"] - int(amount_changed)
+        elif changed_item.lower() == "pear":
+            if stock["pear"] - int(amount_changed) < 0:
+                print("ERROR: Value cannot be below 0.")
+            else:
+                stock["pear"] = stock["pear"] - int(amount_changed)
+        menu()
+    else:
+        print()
+        print("ERROR 3")
+
+
+menu()
