@@ -1,0 +1,340 @@
+import random
+
+grid_loc = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+your_turn = False
+turn_counter = 1
+
+
+
+def main_menu():
+    menu_options = {
+        "TicTacToe" : 1,
+        "GuessingGame" : 2,
+        "SimpleCalculator" : 3,
+        "Close" : 4
+        }
+
+    print("***Main Menu***\n")
+
+    for key in menu_options:
+        print(menu_options[key], "- ", key)
+
+    valid_number = False
+
+    while valid_number == False:
+        try:
+            option_picked = int(input("\nI pick option: "))
+            if option_picked >= menu_options["TicTacToe"] and option_picked <= menu_options["Close"]:
+                valid_number = True
+            else:
+                print("Enter a vald number.\n")
+        except:
+            print("Enter a vald number.\n")
+
+    if option_picked == menu_options["TicTacToe"]:
+        tictactoegame(your_turn, turn_counter)
+    elif option_picked == menu_options["GuessingGame"]:
+        print("")
+        guess_the_number()
+    elif option_picked == menu_options["SimpleCalculator"]:
+        print("")
+        simple_calc()
+    elif option_picked == menu_options["Close"]:
+        print("Now closing.")
+        exit()
+
+
+def tictactoegame(turn, count):
+    print("")
+    print(grid_loc[0], " | ", grid_loc[1], " | ", grid_loc[2])
+    print("--- ----- ---")
+    print(grid_loc[3], " | ", grid_loc[4], " | ", grid_loc[5])
+    print("--- ----- ---")
+    print(grid_loc[6], " | ", grid_loc[7], " | ", grid_loc[8], "\n")
+
+    user_choice = "x"
+    bot_choice = "o"
+
+    print("Turn: ", count)
+
+    if count == 10:
+        tie_game()
+
+    if grid_loc[0] == "x":
+        if grid_loc[1] == "x" and grid_loc[2] == "x":
+            #123
+            win_game()
+        elif grid_loc[3] == "x" and grid_loc[6] == "x":
+            #147
+            win_game()
+        elif grid_loc[4] == "x" and grid_loc[8] == "x":
+            #159
+            win_game()
+    elif grid_loc[1] == "x" and grid_loc[4] == "x" and grid_loc[7] == "x":
+        #258
+        win_game()
+    elif grid_loc[2] == "x":
+        if grid_loc[4] == "x" and grid_loc[6] == "x":
+            #357
+            win_game()
+        elif grid_loc[5] == "x" and grid_loc[8] == "x":
+            #369
+            win_game()
+    elif grid_loc[3] == "x" and grid_loc[4] == "x" and grid_loc[5] == "x":
+        #456
+        win_game()
+    elif grid_loc[6] == "x" and grid_loc[7] == "x" and grid_loc[8] == "x":
+        #789
+        win_game()
+
+    if grid_loc[0] == "o":
+        if grid_loc[1] == "o" and grid_loc[2] == "o":
+            #123
+            lose_game()
+        elif grid_loc[3] == "o" and grid_loc[6] == "o":
+            #147
+            lose_game()
+        elif grid_loc[4] == "o" and grid_loc[8] == "o":
+            #159
+            lose_game()
+    elif grid_loc[1] == "o" and grid_loc[4] == "o" and grid_loc[7] == "o":
+        #258
+        lose_game()
+    elif grid_loc[2] == "o":
+        if grid_loc[4] == "o" and grid_loc[6] == "o":
+            #357
+            lose_game()
+        elif grid_loc[5] == "o" and grid_loc[8] == "o":
+            #369
+            lose_game()
+    elif grid_loc[3] == "o" and grid_loc[4] == "o" and grid_loc[5] == "o":
+        #456
+        lose_game()
+    elif grid_loc[6] == "o" and grid_loc[7] == "o" and grid_loc[8] == "o":
+        #789
+        lose_game()
+
+    if turn:
+        try:
+            user_choice_picked = int(input("Pick a number: "))
+        except ValueError:
+            print("Enter a valid number.\n")
+            tictactoegame(turn, count)
+
+        if user_choice_picked == 1 and grid_loc[0] != "x" and grid_loc[0] != "o":
+            grid_loc[0] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 2 and grid_loc[1] != "x" and grid_loc[1] != "o":
+            grid_loc[1] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 3 and grid_loc[2] != "x" and grid_loc[2] != "o":
+            grid_loc[2] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 4 and grid_loc[3] != "x" and grid_loc[3] != "o":
+            grid_loc[3] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 5 and grid_loc[4] != "x" and grid_loc[4] != "o":
+            grid_loc[4] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 6 and grid_loc[5] != "x" and grid_loc[5] != "o":
+            grid_loc[5] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 7 and grid_loc[6] != "x" and grid_loc[6] != "o":
+            grid_loc[6] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 8 and grid_loc[7] != "x" and grid_loc[7] != "o":
+            grid_loc[7] = user_choice
+            count += 1
+            turn = False
+        elif user_choice_picked == 9 and grid_loc[8] != "x" and grid_loc[8] != "o":
+            grid_loc[8] = user_choice
+            count += 1
+            turn = False
+        else:
+            print("\nPICK A NUMBER BETWEEN 1 AND 9\n")
+
+    elif not turn:
+        while not turn:
+            bot_choice_picked = random.randint(1, 9)
+            print("The bot picked: ", bot_choice_picked)
+
+            if bot_choice_picked == 1 and grid_loc[0] != "x" and grid_loc[0] != "o":
+                grid_loc[0] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 2 and grid_loc[1] != "x" and grid_loc[1] != "o":
+                grid_loc[1] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 3 and grid_loc[2] != "x" and grid_loc[2] != "o":
+                grid_loc[2] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 4 and grid_loc[3] != "x" and grid_loc[3] != "o":
+                grid_loc[3] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 5 and grid_loc[4] != "x" and grid_loc[4] != "o":
+                grid_loc[4] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 6 and grid_loc[5] != "x" and grid_loc[5] != "o":
+                grid_loc[5] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 7 and grid_loc[6] != "x" and grid_loc[6] != "o":
+                grid_loc[6] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 8 and grid_loc[7] != "x" and grid_loc[7] != "o":
+                grid_loc[7] = bot_choice
+                count += 1
+                turn = True
+            elif bot_choice_picked == 9 and grid_loc[8] != "x" and grid_loc[8] != "o":
+                grid_loc[8] = bot_choice
+                count += 1
+                turn = True
+            else:
+                print("\nERROR: Number already picked\n")
+
+    tictactoegame(turn, count)
+
+
+
+def tie_game():
+    print("The game has been tied!")
+    input("Press any key to continue.")
+    exit()
+
+
+
+def win_game():
+    print("You won!")
+    input("Press any key to continue.")
+    exit()
+
+
+
+def lose_game():
+    print("You lost!")
+    input("Press any key to continue.")
+    exit()
+
+
+def guess_the_number():
+    print("Enter two numbers.")
+
+    first_num = None
+    second_num = None
+    attempts_left = None
+    guessed_numbers = []
+
+    while first_num is None:
+        try:
+            first_num = int(input("Enter your first number: "))
+            if first_num <= 0:
+                print("\nValue must be above 0.\n")
+                first_num = None
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+
+    while second_num is None:
+        try:
+            second_num = int(input("Enter your second number: "))
+            if first_num >= second_num:
+                print("\n2nd number must be larger.\n")
+                second_num = None
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+
+    while attempts_left is None:
+        try:
+            attempts_left = int(input("How many attempts would you like: "))
+            if attempts_left <= 0:
+                print("\nValue must be above 0.\n")
+                attempts_left = None
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+
+    random_num = random.randint(first_num, second_num)
+    user_guess = None
+
+    while True:
+        try:
+            user_guess = int(input("Enter your guess between " + str(first_num) + " and " + str(second_num) + ": "))
+        except ValueError:
+            print("\nERROR: Enter a number.\n")
+            input("Press any key to continue.")
+
+        if user_guess == random_num:
+            print("You win!")
+            input("Press any key to continue.")
+            exit()
+        elif user_guess != random_num:
+            print("\nWrong answer!")
+        attempts_left -= 1
+        if attempts_left == 0:
+            print("You lose!")
+            print("The correct answer was: ", random_num)
+            input("Press any key to continue.")
+            exit()
+        if user_guess < random_num:
+            print("You need to guess higher!")
+        elif user_guess > random_num:
+            print("You need to guess lower!")
+        print("You have ", attempts_left, " guesses remaining.\n")
+        guessed_numbers.append(user_guess)
+        print("You have guessed: ", guessed_numbers)
+
+
+def simple_calc():
+    valid_numbers = False
+    valid_operator = False
+    final_answer = None
+
+    while valid_numbers == False:
+        try:
+            first_num = int(input("First number: "))
+            second_num = int(input("Second number: "))
+            valid_numbers = True
+        except:
+            print("Enter a vald number.\n")
+
+    while valid_operator == False:
+        operator = input("+, -, *, or / : ")
+        if operator != "+" or operator != "-" or operator != "*" or operator != "/":
+            print("Enter a valid operator.")
+            print()
+            input("Press any key to continue.\n")
+        else:
+            valid_operator = True
+
+    if operator == "+":
+        final_answer = first_num + second_num
+        print(final_answer)
+        input("Press any key to continue.")
+    elif operator == "-":
+        final_answer = first_num - second_num
+        print(final_answer)
+        input("Press any key to continue.")
+    elif operator == "*":
+        final_answer = first_num * second_num
+        print(final_answer)
+        input("Press any key to continue.")
+    elif operator == "/":
+        final_answer = first_num / second_num
+        print(final_answer)
+        input("Press any key to continue.")
+    else:
+        print("ERROR CODE 5")
+        input("Press any key to continue.")
+        
+
+main_menu()
