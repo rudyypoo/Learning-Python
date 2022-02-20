@@ -6,7 +6,6 @@ your_turn = True
 turn_counter = 1
 
 
-
 def main_menu():
     menu_options = [
         ["TicTacToe", 1],
