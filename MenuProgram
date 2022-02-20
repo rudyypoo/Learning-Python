@@ -5,7 +5,6 @@ grid_loc = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 your_turn = True
 turn_counter = 1
 
-
 def main_menu():
     menu_options = [
         ["TicTacToe", 1],
@@ -46,7 +45,7 @@ def main_menu():
         print("")
         simple_calc()
     elif option_picked == menu_options[3][-1]:
-        input("Press any button to close.")
+        input("Press any key to close.")
         exit()
 
 
@@ -67,7 +66,7 @@ def tictactoegame(turn, count):
     #Ends game in a tie if it is turn 5 with no winner or loser
     if count == 5:
         print("The game has been tied!")
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
 
     win_game = False
@@ -132,13 +131,13 @@ def tictactoegame(turn, count):
     #Ends the game if you won
     if win_game == True:
         print("You won!")
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
 
     #Ends the game if you lost
     if lose_game == True:
         print("You lost!")
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
 
     ttt_valid_num = False
@@ -281,7 +280,8 @@ def guess_the_number():
     #Win if you guessed correctly, otherwise tells you that you guessed wrong and subtracts 1 attempt remaining
     if user_guess == random_num:
         print("You win!")
-        input("Press any key to continue.")
+        input("Press any key to close.")
+        exit()
     else:
         print("\nWrong answer!")
         attempts_left -= 1
@@ -289,7 +289,7 @@ def guess_the_number():
     if attempts_left == 0:
         print("You lose!")
         print("The correct answer was: ", random_num)
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
     #Tells you that you need to guess higher
     if user_guess < random_num:
@@ -342,26 +342,26 @@ def simple_calc():
     if operator == "+":
         final_answer = first_num + second_num
         print(final_answer)
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
     elif operator == "-":
         final_answer = first_num - second_num
         print(final_answer)
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
     elif operator == "*":
         final_answer = first_num * second_num
         print(final_answer)
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
     elif operator == "/":
         final_answer = first_num / second_num
         print(final_answer)
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
     else:
         print("ERROR CODE 5")
-        input("Press any key to continue.")
+        input("Press any key to close.")
         exit()
         
 
