@@ -10,8 +10,7 @@ def main_menu():
         ["TicTacToe", 1],
         ["GuessingGame", 2],
         ["SimpleCalculator", 3],
-        ["Close", 4]
-        ]
+        ["Close", 4]]
 
     print("***Main Menu***\n")
 
