@@ -7,15 +7,15 @@ if __name__ == "__main__":
         print()
         print("-- Main Menu --")
 
-        main_menu_list = [
+        menu_list = [
             ["Calculator", 1],
             ["TikTacToe", 2]
         ]
 
         # Prints the menu options
         up_one = 0
-        for option in main_menu_list:
-            print(f"{main_menu_list[up_one][-1]} : {main_menu_list[up_one][0]}")
+        for option in menu_list:
+            print(f"{menu_list[up_one][-1]} : {menu_list[up_one][0]}")
             up_one += 1
 
         # Forces user to enter a valid menu option
@@ -23,7 +23,7 @@ if __name__ == "__main__":
         while not valid_number:
             try:
                 option_picked = int(input("\nWhat option would you like: "))
-                if main_menu_list[0][-1] <= option_picked <= main_menu_list[1][-1]:
+                if menu_list[0][-1] <= option_picked <= main_menu_list[1][-1]:
                     valid_number = True
                 else:
                     print("Enter a number between 1 and 2")
@@ -31,7 +31,7 @@ if __name__ == "__main__":
                 print("Enter a number between 1 and 2")
 
         # START CALCULATOR
-        if option_picked == main_menu_list[0][-1]:
+        if option_picked == menu_list[0][-1]:
             valid_first_num = False
             valid_second_num = False
             valid_operator = False
@@ -93,7 +93,7 @@ if __name__ == "__main__":
                 running = False
 
         # START TICTACTOE
-        if option_picked == main_menu_list[1][-1]:
+        if option_picked == menu_list[1][-1]:
             ttt_running = True
             grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             is_turn = True
@@ -118,7 +118,7 @@ if __name__ == "__main__":
                         except ValueError:
                             print("Enter a number.\n")
 
-                    # Print x as your option
+                        # Print x as your option
                         if grid[user_choice] != "x" and grid[user_choice] != "o":
                             grid[user_choice] = "x"
                         else:
