@@ -1,5 +1,4 @@
 import random
-import time
 
 if __name__ == "__main__":
     running = True
@@ -164,7 +163,7 @@ if __name__ == "__main__":
                 # 789
                 if grid[6] == "x" and grid[7] == "x" and grid[8] == "x":
                     you_win = True
-                    
+
                 # If you won it will end the game
                 if you_win:
                     print("\nYou win!")
@@ -196,7 +195,7 @@ if __name__ == "__main__":
                 # 789
                 if grid[6] == "o" and grid[7] == "o" and grid[8] == "o":
                     you_lose = True
-                
+
                 # If you lost it will end the game
                 if you_lose:
                     print("\nYou lose!")
@@ -205,7 +204,7 @@ if __name__ == "__main__":
                 if not is_turn:
                     bot_choice += 1
                     print(f"\nThe bot picked: {bot_choice}")
-                
+
                 # Changes turn
                 if is_turn:
                     is_turn = False
@@ -213,4 +212,3 @@ if __name__ == "__main__":
                     is_turn = True
 
         running = False
-        
