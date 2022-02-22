@@ -1,0 +1,218 @@
+import random
+import time
+
+if __name__ == "__main__":
+    running = True
+    while running:
+
+        print()
+        print("-- Main Menu --")
+
+        main_menu_list = [
+            ["Calculator", 1],
+            ["TikTacToe", 2]
+        ]
+
+        # Prints the menu options
+        up_one = 0
+        for option in main_menu_list:
+            print(f"{main_menu_list[up_one][-1]} : {main_menu_list[up_one][0]}")
+            up_one += 1
+
+        # Forces user to enter a valid menu option
+        valid_number = False
+        while not valid_number:
+            try:
+                option_picked = int(input("\nWhat option would you like: "))
+                if main_menu_list[0][-1] <= option_picked <= main_menu_list[1][-1]:
+                    valid_number = True
+                else:
+                    print("Enter a number between 1 and 2.")
+            except ValueError:
+                print("Enter a number between 1 and 2.")
+
+        # START CALCULATOR
+        if option_picked == main_menu_list[0][-1]:
+            valid_first_num = False
+            valid_second_num = False
+            valid_operator = False
+
+            # Asks and checks for 1st number and converts to float
+            while not valid_first_num:
+                try:
+                    first_num = input("First number: ")
+                    first_num = float(first_num)
+                    if isinstance(first_num, float):
+                        valid_first_num = True
+                except ValueError:
+                    print("Enter a valid number.\n")
+
+            # Asks and checks for 2nd number and converts to float
+            while not valid_second_num:
+                try:
+                    second_num = input("Second number: ")
+                    second_num = float(second_num)
+                    if isinstance(second_num, float):
+                        valid_second_num = True
+                except ValueError:
+                    print("Enter a valid number.\n")
+
+            # Checks that user entered a valid operator
+            while not valid_operator:
+                operator = input("+, -, *, or / : ")
+                if operator == "+" or operator == "-" or operator == "*" or operator == "/":
+                    valid_operator = True
+                else:
+                    print("Enter a valid operator.")
+                    print()
+                    input("Press any key to continue.\n")
+
+            # Executes the math according to the operator
+            if operator == "+":
+                final_answer = first_num + second_num
+                print(final_answer)
+                input("Press any key to close.")
+                running = False
+            elif operator == "-":
+                final_answer = first_num - second_num
+                print(final_answer)
+                input("Press any key to close.")
+                running = False
+            elif operator == "*":
+                final_answer = first_num * second_num
+                print(final_answer)
+                input("Press any key to close.")
+                running = False
+            elif operator == "/":
+                final_answer = first_num / second_num
+                print(final_answer)
+                input("Press any key to close.")
+                running = False
+            else:
+                print("ERROR CODE 5")
+                input("Press any key to close.")
+                running = False
+
+        # START TICTACTOE
+        if option_picked == main_menu_list[1][-1]:
+            ttt_running = True
+            grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            is_turn = True
+
+            while ttt_running:
+                # Prints TicTacToe grid
+                print(f"\n{grid[0]} | {grid[1]} | {grid[2]}")
+                print(f"{grid[3]} | {grid[4]} | {grid[5]}")
+                print(f"{grid[6]} | {grid[7]} | {grid[8]}")
+
+                # Forces user to enter a number that correlates to a grid square from the list, on their turn only
+                if is_turn:
+                    valid_choice = False
+                    while not valid_choice:
+                        try:
+                            user_choice = int(input("Enter your choice: "))
+                            if 1 <= user_choice <= 9:
+                                user_choice -= 1
+                                valid_choice = True
+                            else:
+                                print("Enter a number between 1 and 9.\n")
+                        except ValueError:
+                            print("Enter a number.\n")
+
+                    # Print x as your option
+                        if grid[user_choice] != "x" and grid[user_choice] != "o":
+                            grid[user_choice] = "x"
+                        else:
+                            print("That number has already been picked!\n")
+                            valid_choice = False
+
+                # If it's not your turn, print o as the bots option
+                if not is_turn:
+                    bot_valid_choice = False
+                    while not bot_valid_choice:
+                        bot_choice = random.randint(1, 9)
+                        bot_choice -= 1
+                        if grid[bot_choice] != "x" and grid[bot_choice] != "o":
+                            grid[bot_choice] = "o"
+                            bot_valid_choice = True
+                        else:
+                            bot_valid_choice = False
+
+                # Checks if you've won and ends the game
+                # 123
+                if grid[0] == "x" and grid[1] == "x" and grid[2] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+                # 147
+                if grid[0] == "x" and grid[3] == "x" and grid[6] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+                # 159
+                if grid[0] == "x" and grid[4] == "x" and grid[8] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+                # 258
+                if grid[1] == "x" and grid[4] == "x" and grid[7] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+                # 357
+                if grid[2] == "x" and grid[4] == "x" and grid[6] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+                # 369
+                if grid[2] == "x" and grid[5] == "x" and grid[8] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+                # 456
+                if grid[3] == "x" and grid[4] == "x" and grid[5] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+                # 789
+                if grid[6] == "x" and grid[7] == "x" and grid[8] == "x":
+                    print("\nYou win!")
+                    ttt_running = False
+
+                # Checks if you've lost and ends the game
+                # 123
+                if grid[0] == "o" and grid[1] == "o" and grid[2] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+                # 147
+                if grid[0] == "o" and grid[3] == "o" and grid[6] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+                # 159
+                if grid[0] == "o" and grid[4] == "o" and grid[8] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+                # 258
+                if grid[1] == "o" and grid[4] == "o" and grid[7] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+                # 357
+                if grid[2] == "o" and grid[4] == "o" and grid[6] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+                # 369
+                if grid[2] == "o" and grid[5] == "o" and grid[8] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+                # 456
+                if grid[3] == "o" and grid[4] == "o" and grid[5] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+                # 789
+                if grid[6] == "o" and grid[7] == "o" and grid[8] == "o":
+                    print("\nYou lose!")
+                    ttt_running = False
+
+                if not is_turn:
+                    bot_choice += 1
+                    print(f"\nThe bot picked: {bot_choice}")
+
+                if is_turn:
+                    is_turn = False
+                elif not is_turn:
+                    is_turn = True
+
+        running = False
