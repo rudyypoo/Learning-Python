@@ -1,4 +1,5 @@
 import random
+import time
 
 if __name__ == "__main__":
     running = True
@@ -26,9 +27,9 @@ if __name__ == "__main__":
                 if main_menu_list[0][-1] <= option_picked <= main_menu_list[1][-1]:
                     valid_number = True
                 else:
-                    print("Enter a number between 1 and 2.")
+                    print("Enter a number between 1 and 2")
             except ValueError:
-                print("Enter a number between 1 and 2.")
+                print("Enter a number between 1 and 2")
 
         # START CALCULATOR
         if option_picked == main_menu_list[0][-1]:
@@ -137,79 +138,74 @@ if __name__ == "__main__":
                         else:
                             bot_valid_choice = False
 
-                # Checks if you've won and ends the game
+                you_win = False
+                # Checks if you've won
                 # 123
                 if grid[0] == "x" and grid[1] == "x" and grid[2] == "x":
-                    print("\nYou win!")
-                    ttt_running = False
+                    you_win = True
                 # 147
                 if grid[0] == "x" and grid[3] == "x" and grid[6] == "x":
-                    print("\nYou win!")
-                    ttt_running = False
+                    you_win = True
                 # 159
                 if grid[0] == "x" and grid[4] == "x" and grid[8] == "x":
-                    print("\nYou win!")
-                    ttt_running = False
+                    you_win = True
                 # 258
                 if grid[1] == "x" and grid[4] == "x" and grid[7] == "x":
-                    print("\nYou win!")
-                    ttt_running = False
+                    you_win = True
                 # 357
                 if grid[2] == "x" and grid[4] == "x" and grid[6] == "x":
-                    print("\nYou win!")
-                    ttt_running = False
+                    you_win = True
                 # 369
                 if grid[2] == "x" and grid[5] == "x" and grid[8] == "x":
-                    print("\nYou win!")
-                    ttt_running = False
+                    you_win = True
                 # 456
                 if grid[3] == "x" and grid[4] == "x" and grid[5] == "x":
-                    print("\nYou win!")
-                    ttt_running = False
+                    you_win = True
                 # 789
                 if grid[6] == "x" and grid[7] == "x" and grid[8] == "x":
+                    you_win = True
+                    
+                # If you won it will end the game
+                if you_win:
                     print("\nYou win!")
                     ttt_running = False
 
-                # Checks if you've lost and ends the game
+                you_lose = False
+                # Checks if you've lost
                 # 123
                 if grid[0] == "o" and grid[1] == "o" and grid[2] == "o":
-                    print("\nYou lose!")
-                    ttt_running = False
+                    you_lose = True
                 # 147
                 if grid[0] == "o" and grid[3] == "o" and grid[6] == "o":
-                    print("\nYou lose!")
-                    ttt_running = False
+                    you_lose = True
                 # 159
                 if grid[0] == "o" and grid[4] == "o" and grid[8] == "o":
-                    print("\nYou lose!")
-                    ttt_running = False
+                    you_lose = True
                 # 258
                 if grid[1] == "o" and grid[4] == "o" and grid[7] == "o":
-                    print("\nYou lose!")
-                    ttt_running = False
+                    you_lose = True
                 # 357
                 if grid[2] == "o" and grid[4] == "o" and grid[6] == "o":
-                    print("\nYou lose!")
-                    ttt_running = False
+                    you_lose = True
                 # 369
                 if grid[2] == "o" and grid[5] == "o" and grid[8] == "o":
-                    print("\nYou lose!")
-                    ttt_running = False
+                    you_lose = True
                 # 456
                 if grid[3] == "o" and grid[4] == "o" and grid[5] == "o":
-                    print("\nYou lose!")
-                    ttt_running = False
+                    you_lose = True
                 # 789
                 if grid[6] == "o" and grid[7] == "o" and grid[8] == "o":
+                    you_lose = True
+                
+                # If you lost it will end the game
+                if you_lose:
                     print("\nYou lose!")
                     ttt_running = False
 
-                # Tells you what the bot picked
                 if not is_turn:
                     bot_choice += 1
                     print(f"\nThe bot picked: {bot_choice}")
-
+                
                 # Changes turn
                 if is_turn:
                     is_turn = False
@@ -217,3 +213,4 @@ if __name__ == "__main__":
                     is_turn = True
 
         running = False
+        
