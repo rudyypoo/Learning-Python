@@ -205,10 +205,12 @@ if __name__ == "__main__":
                     print("\nYou lose!")
                     ttt_running = False
 
+                # Tells you what the bot picked
                 if not is_turn:
                     bot_choice += 1
                     print(f"\nThe bot picked: {bot_choice}")
 
+                # Changes turn
                 if is_turn:
                     is_turn = False
                 elif not is_turn:
