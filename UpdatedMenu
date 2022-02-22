@@ -3,9 +3,7 @@ import random
 if __name__ == "__main__":
     running = True
     while running:
-
-        print()
-        print("-- Main Menu --")
+        print("\n-- Main Menu --")
 
         menu_list = [
             ["Calculator", 1],
@@ -13,10 +11,8 @@ if __name__ == "__main__":
         ]
 
         # Prints the menu options
-        up_one = 0
         for option in menu_list:
-            print(f"{menu_list[up_one][-1]} : {menu_list[up_one][0]}")
-            up_one += 1
+            print(f"{option[-1]} : {option[0]}")
 
         # Forces user to enter a valid menu option
         valid_number = False
