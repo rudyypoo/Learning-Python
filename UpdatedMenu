@@ -1,13 +1,13 @@
 import random
 
 if __name__ == "__main__":
-    running = True
-    while running:
+    while True:
         print("\n-- Main Menu --")
 
         menu_list = [
             ["Calculator", 1],
-            ["TikTacToe", 2]
+            ["TikTacToe", 2],
+            ["Close Menu", 3]
         ]
 
         # Prints the menu options
@@ -18,12 +18,12 @@ if __name__ == "__main__":
         while True:
             try:
                 option_picked = int(input("\nWhat option would you like: "))
-                if menu_list[0][-1] <= option_picked <= menu_list[1][-1]:
+                if menu_list[0][-1] <= option_picked <= menu_list[2][-1]:
                     break
                 else:
-                    print("Enter a number between 1 and 2")
+                    print("Enter a number between 1 and 3")
             except ValueError:
-                print("Enter a number between 1 and 2")
+                print("Enter a number between 1 and 3")
 
         # START CALCULATOR
         if option_picked == menu_list[0][-1]:
@@ -97,21 +97,22 @@ if __name__ == "__main__":
 
                 # Forces user to enter a number that correlates to a grid square from the list, on their turn only
                 if is_turn:
-                    valid_choice = False
-                    while not valid_choice:
+                    while True:
                         try:
                             user_choice = int(input("Enter your choice: "))
                             if 1 <= user_choice <= 9:
                                 user_choice -= 1
-                                valid_choice = True
                             else:
                                 print("Enter a number between 1 and 9.\n")
+                                continue
                         except ValueError:
                             print("Enter a number.\n")
+                            continue
 
                         # Print x as your option
                         if grid[user_choice] != "x" and grid[user_choice] != "o":
                             grid[user_choice] = "x"
+                            break
                         else:
                             print("That number has already been picked!\n")
                             valid_choice = False
@@ -198,4 +199,10 @@ if __name__ == "__main__":
                 elif not is_turn:
                     is_turn = True
 
-        running = False
+        # Close the program
+        if option_picked == menu_list[2][-1]:
+            print("Thanks for testing me!")
+            input("Press any key to close.")
+            break
+
+        continue
