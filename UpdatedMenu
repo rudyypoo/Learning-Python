@@ -189,9 +189,9 @@ if __name__ == "__main__":
                     print("\nYou lose!")
                     break
 
+                # Prints what square the bot picked
                 if not is_turn:
-                    bot_choice += 1
-                    print(f"\nThe bot picked: {bot_choice}")
+                    print(f"\nThe bot picked: {bot_choice + 1}")
 
                 # Changes turn
                 if is_turn:
