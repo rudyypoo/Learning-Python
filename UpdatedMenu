@@ -15,12 +15,11 @@ if __name__ == "__main__":
             print(f"{option[-1]} : {option[0]}")
 
         # Forces user to enter a valid menu option
-        valid_number = False
-        while not valid_number:
+        while True:
             try:
                 option_picked = int(input("\nWhat option would you like: "))
                 if menu_list[0][-1] <= option_picked <= menu_list[1][-1]:
-                    valid_number = True
+                    break
                 else:
                     print("Enter a number between 1 and 2")
             except ValueError:
@@ -28,35 +27,32 @@ if __name__ == "__main__":
 
         # START CALCULATOR
         if option_picked == menu_list[0][-1]:
-            valid_first_num = False
-            valid_second_num = False
-            valid_operator = False
 
             # Asks and checks for 1st number and converts to float
-            while not valid_first_num:
+            while True:
                 try:
                     first_num = input("First number: ")
                     first_num = float(first_num)
                     if isinstance(first_num, float):
-                        valid_first_num = True
+                        break
                 except ValueError:
                     print("Enter a valid number.\n")
 
             # Asks and checks for 2nd number and converts to float
-            while not valid_second_num:
+            while True:
                 try:
                     second_num = input("Second number: ")
                     second_num = float(second_num)
                     if isinstance(second_num, float):
-                        valid_second_num = True
+                        break
                 except ValueError:
                     print("Enter a valid number.\n")
 
             # Checks that user entered a valid operator
-            while not valid_operator:
+            while True:
                 operator = input("+, -, *, or / : ")
                 if operator == "+" or operator == "-" or operator == "*" or operator == "/":
-                    valid_operator = True
+                    break
                 else:
                     print("Enter a valid operator.")
                     print()
@@ -90,11 +86,10 @@ if __name__ == "__main__":
 
         # START TICTACTOE
         if option_picked == menu_list[1][-1]:
-            ttt_running = True
             grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             is_turn = True
 
-            while ttt_running:
+            while True:
                 # Prints TicTacToe grid
                 print(f"\n{grid[0]} | {grid[1]} | {grid[2]}")
                 print(f"{grid[3]} | {grid[4]} | {grid[5]}")
@@ -123,15 +118,11 @@ if __name__ == "__main__":
 
                 # If it's not your turn, print o as the bots option
                 if not is_turn:
-                    bot_valid_choice = False
-                    while not bot_valid_choice:
-                        bot_choice = random.randint(1, 9)
-                        bot_choice -= 1
+                    while True:
+                        bot_choice = random.randint(0, 8)
                         if grid[bot_choice] != "x" and grid[bot_choice] != "o":
                             grid[bot_choice] = "o"
-                            bot_valid_choice = True
-                        else:
-                            bot_valid_choice = False
+                            break
 
                 you_win = False
                 # Checks if you've won
@@ -163,7 +154,7 @@ if __name__ == "__main__":
                 # If you won it will end the game
                 if you_win:
                     print("\nYou win!")
-                    ttt_running = False
+                    break
 
                 you_lose = False
                 # Checks if you've lost
@@ -195,7 +186,7 @@ if __name__ == "__main__":
                 # If you lost it will end the game
                 if you_lose:
                     print("\nYou lose!")
-                    ttt_running = False
+                    break
 
                 if not is_turn:
                     bot_choice += 1
