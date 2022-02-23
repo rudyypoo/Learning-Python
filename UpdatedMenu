@@ -86,7 +86,8 @@ if __name__ == "__main__":
 
         # START TICTACTOE
         if option_picked == menu_list[1][-1]:
-            grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            grid = list(range(1, 10))
+            print(grid)
             is_turn = True
 
             while True:
