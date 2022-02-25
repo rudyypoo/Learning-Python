@@ -85,16 +85,35 @@ if __name__ == "__main__":
                 running = False
 
         # START TICTACTOE
+        turn_counter = 0
         if option_picked == menu_list[1][-1]:
-            grid = list(range(1, 10))
-            print(grid)
+            grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             is_turn = True
+            won_game = False
+            lost_game = False
+            tied_game = False
 
             while True:
+                turn_counter += 1
                 # Prints TicTacToe grid
                 print(f"\n{grid[0]} | {grid[1]} | {grid[2]}")
                 print(f"{grid[3]} | {grid[4]} | {grid[5]}")
                 print(f"{grid[6]} | {grid[7]} | {grid[8]}")
+
+                # If you won it will end the game
+                if won_game:
+                    print("\nYou win!")
+                    break
+
+                # If you lost it will end the game
+                if lost_game:
+                    print("\nYou lose!")
+                    break
+
+                # Ties game if all squares are used and there is no winner
+                if tied_game:
+                    print("\nThe game is tied!")
+                    break
 
                 # Forces user to enter a number that correlates to a grid square from the list, on their turn only
                 if is_turn:
@@ -119,6 +138,7 @@ if __name__ == "__main__":
                             valid_choice = False
 
                 # If it's not your turn, print o as the bots option
+                bot_choice = None
                 if not is_turn:
                     while True:
                         bot_choice = random.randint(0, 8)
@@ -153,11 +173,6 @@ if __name__ == "__main__":
                 if grid[6] == "x" and grid[7] == "x" and grid[8] == "x":
                     you_win = True
 
-                # If you won it will end the game
-                if you_win:
-                    print("\nYou win!")
-                    break
-
                 you_lose = False
                 # Checks if you've lost
                 # 123
@@ -185,11 +200,6 @@ if __name__ == "__main__":
                 if grid[6] == "o" and grid[7] == "o" and grid[8] == "o":
                     you_lose = True
 
-                # If you lost it will end the game
-                if you_lose:
-                    print("\nYou lose!")
-                    break
-
                 # Prints what square the bot picked
                 if not is_turn:
                     print(f"\nThe bot picked: {bot_choice + 1}")
@@ -200,10 +210,14 @@ if __name__ == "__main__":
                 elif not is_turn:
                     is_turn = True
 
+                # After 9 loops, next loop will show tied game
+                if turn_counter == 9:
+                    tied_game = True
+
         # Close the program
         if option_picked == menu_list[2][-1]:
             print("Thanks for testing me!")
-            input("Press any key to close.")
+            input("\nPress any key to close.")
             break
 
         continue
