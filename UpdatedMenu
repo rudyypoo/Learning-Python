@@ -5,9 +5,9 @@ if __name__ == "__main__":
         print("\n-- Main Menu --")
 
         menu_list = [
-            ["Calculator", 1],
-            ["TikTacToe", 2],
-            ["Close Menu", 3]
+            ['Calculator', 1],
+            ['TikTacToe', 2],
+            ['Close Menu', 3]
         ]
 
         # Prints the menu options
@@ -50,34 +50,41 @@ if __name__ == "__main__":
 
             # Checks that user entered a valid operator
             while True:
-                operator = input("+, -, *, or / : ")
-                if operator == "+" or operator == "-" or operator == "*" or operator == "/":
+                operator = input("Add, Subtract, Divide, Multiply, Power: ")
+                print()
+                if operator.lower() == "add" or operator.lower() == "subtract" or operator.lower() == "divide":
+                    break
+                elif operator.lower() == "multiply" or operator.lower() == "power":
                     break
                 else:
                     print("Enter a valid operator.")
-                    print()
                     input("Press any key to continue.\n")
 
             # Executes the math according to the operator
-            if operator == "+":
+            if operator == "add":
                 final_answer = first_num + second_num
-                print(final_answer)
-                input("Press any key to close.")
+                print(f"{first_num} + {second_num} = {final_answer}")
+                input("Press any key to return to the menu.")
                 running = False
-            elif operator == "-":
+            elif operator == "subtract":
                 final_answer = first_num - second_num
-                print(final_answer)
-                input("Press any key to close.")
+                print(f"{first_num} - {second_num} = {final_answer}")
+                input("Press any key to return to the menu.")
                 running = False
-            elif operator == "*":
+            elif operator == "multiply":
                 final_answer = first_num * second_num
-                print(final_answer)
-                input("Press any key to close.")
+                print(f"{first_num} x {second_num} = {final_answer}")
+                input("Press any key to return to the menu.")
                 running = False
-            elif operator == "/":
+            elif operator == "divide":
                 final_answer = first_num / second_num
-                print(final_answer)
-                input("Press any key to close.")
+                print(f"{first_num} / {second_num} = {final_answer}")
+                input("Press any key to return to the menu.")
+                running = False
+            elif operator == "power":
+                final_answer = first_num ** second_num
+                print(f"{first_num} to the power of {second_num} = {final_answer}")
+                input("Press any key to return to the menu.")
                 running = False
             else:
                 print("ERROR CODE 5")
@@ -89,7 +96,7 @@ if __name__ == "__main__":
         if option_picked == menu_list[1][-1]:
             grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             is_turn = True
-            won_game = False
+            you_win = False
             lost_game = False
             tied_game = False
 
@@ -101,7 +108,7 @@ if __name__ == "__main__":
                 print(f"{grid[6]} | {grid[7]} | {grid[8]}")
 
                 # If you won it will end the game
-                if won_game:
+                if you_win:
                     print("\nYou win!")
                     break
 
