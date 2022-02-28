@@ -1,0 +1,73 @@
+# 1. Take a random word from a list
+# 2. Ask the user how many guesses they want
+# 3. Ask the user to enter a letter to guess
+# 4. If they guessed correctly, place the letter into the word
+# 5. If they guessed incorrectly, reduce remaining guesses
+# 6. Show all letters guessed
+
+import random
+import string
+
+
+def game():
+    words = ["put", "random", "words", "in", "these"]
+    word = random.choice(words).upper()
+
+    while ' ' in word or '-' in word:
+        word = random.choice(words).upper()
+
+    word_letters = set(word)
+    used_letters = set()
+    alphabet = set(string.ascii_uppercase)
+
+    while True:
+        try:
+            lives = int(input("How many lives: "))
+            print()
+            break
+        except ValueError:
+            print("Enter a valid number\n")
+
+    while True:
+        if lives == 0:
+            print("You ran out of lives!")
+            print(f"The correct word was: {word}")
+            break
+
+        if len(word_letters) == 0:
+            print("You win!")
+            print(f"The word was: {word}!")
+            break
+
+        print(f"Lives remaining: {lives}")
+
+        if len(used_letters) > 0:
+            print(f"Used letters:", ", ".join(sorted(used_letters)))
+
+        print("Current word: ", end="")
+        for letter in word:
+            if letter not in used_letters:
+                print("_ ", end="")
+            elif letter in used_letters:
+                print(f"{letter} ", end="")
+
+        print()
+        user_guess = input("Enter a letter: ").upper()
+        print()
+
+        if user_guess in alphabet - used_letters:
+            used_letters.add(user_guess)
+            if user_guess not in word_letters:
+                lives -= 1
+            if user_guess in word_letters:
+                word_letters.remove(user_guess)
+
+        elif user_guess in used_letters:
+            print(f"You've already guessed \"{user_guess}\"\n")
+
+        else:
+            print("Enter a valid letter.\n")
+
+
+if __name__ == "__main__":
+    game()
