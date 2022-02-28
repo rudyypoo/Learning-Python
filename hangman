@@ -13,9 +13,6 @@ def game():
     words = ["put", "random", "words", "in", "these"]
     word = random.choice(words).upper()
 
-    while ' ' in word or '-' in word:
-        word = random.choice(words).upper()
-
     word_letters = set(word)
     used_letters = set()
     alphabet = set(string.ascii_uppercase)
