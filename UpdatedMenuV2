@@ -1,0 +1,352 @@
+import random
+import string
+from words import words
+
+
+def menu():
+    print("\n---MAIN MENU---")
+    menu_options = ["TicTacToe", "Hangman", "Calculator", "Close Menu"]
+    for pos, index in enumerate(menu_options, start=1):
+        print(f"{pos} - {index}")
+
+    picked = None
+
+    while True:
+        try:
+            picked = int(input("\nPick an option: "))
+        except ValueError:
+            print("Enter a valid number.")
+            continue
+
+        if 1 <= picked <= len(menu_options):
+            break
+        else:
+            print("Enter a valid number.")
+
+    return picked
+
+
+def check_user_horizontals(board, user_operator):
+    if board[0] == board[1] == board[2] and board[0] == user_operator:
+        return True
+    elif board[3] == board[4] == board[5] and board[3] == user_operator:
+        return True
+    elif board[6] == board[7] == board[8] and board[6] == user_operator:
+        return True
+
+
+def check_bot_horizontals(board, bot_operator):
+    if board[0] == board[1] == board[2] and board[0] == bot_operator:
+        return True
+    elif board[3] == board[4] == board[5] and board[3] == bot_operator:
+        return True
+    elif board[6] == board[7] == board[8] and board[6] == bot_operator:
+        return True
+
+
+def check_user_diagonals(board, user_operator):
+    if board[0] == board[4] == board[8] and board[0] == user_operator:
+        return True
+    if board[2] == board[4] == board[6] and board[2] == user_operator:
+        return True
+
+
+def check_bot_diagonals(board, bot_operator):
+    if board[0] == board[4] == board[8] and board[0] == bot_operator:
+        return True
+    if board[2] == board[4] == board[6] and board[2] == bot_operator:
+        return True
+
+
+def check_user_row(board, user_operator):
+    if board[0] == board[3] == board[6] and board[0] == user_operator:
+        return True
+    elif board[1] == board[4] == board[7] and board[1] == user_operator:
+        return True
+    elif board[2] == board[5] == board[8] and board[2] == user_operator:
+        return True
+
+
+def check_bot_row(board, bot_operator):
+    if board[0] == board[3] == board[6] and board[0] == bot_operator:
+        return True
+    elif board[1] == board[4] == board[7] and board[1] == bot_operator:
+        return True
+    elif board[2] == board[5] == board[8] and board[2] == bot_operator:
+        return True
+
+
+def check_tie(board):
+    for index in board:
+        if isinstance(index, int):
+            return False
+    return True
+
+
+def first_second():
+    is_turn = None
+    while True:
+        try:
+            fir_sec = int(input("First or second(1 or 2): "))
+        except ValueError:
+            print("Enter 1 or 2.")
+            continue
+        if fir_sec == 1:
+            is_turn = True
+        elif fir_sec == 2:
+            is_turn = False
+        if fir_sec == 1 or fir_sec == 2:
+            print()
+            break
+        else:
+            print("Enter 1 or 2.")
+
+    return is_turn
+
+
+def pick_operator():
+    user_operator = None
+    bot_operator = None
+    while True:
+        try:
+            user_operator = int(input("x's or o'x(1 or 2): "))
+        except ValueError:
+            print("Enter 1 or 2.")
+            continue
+        if user_operator == 1 or user_operator == 2:
+            if user_operator == 1:
+                user_operator = "x"
+                bot_operator = "o"
+                print()
+                break
+            elif user_operator == 2:
+                user_operator = "o"
+                bot_operator = "x"
+                print()
+                break
+        else:
+            print("Enter 1 or 2.")
+
+    operators = [user_operator, bot_operator]
+
+    return operators
+
+
+def tictactoe():
+    board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    is_turn = first_second()
+    operators = pick_operator()
+
+    while True:
+
+        print(f"{board[0]} | {board[1]} | {board[2]}")
+        print(f"{board[3]} | {board[4]} | {board[5]}")
+        print(f"{board[6]} | {board[7]} | {board[8]}\n")
+
+        if check_user_horizontals(board, operators[0]):
+            print("You won the game!")
+            input("Press any key to return to the menu.")
+            break
+
+        if check_bot_horizontals(board, operators[1]):
+            print("You lost the game!")
+            input("Press any key to return to the menu.")
+            break
+
+        if check_user_diagonals(board, operators[0]):
+            print("You won the game!")
+            input("Press any key to return to the menu.")
+            break
+
+        if check_bot_diagonals(board, operators[1]):
+            print("You lost the game!")
+            input("Press any key to return to the menu.")
+            break
+
+        if check_user_row(board, operators[0]):
+            print("You won the game!")
+            input("Press any key to return to the menu.")
+            break
+
+        if check_bot_row(board, operators[1]):
+            print("You lost the game!")
+            input("Press any key to return to the menu.")
+            break
+
+        if check_tie(board):
+            print("The game is tied")
+            input("Press any key to return to the menu.")
+            break
+
+        if is_turn:
+            while True:
+                try:
+                    spot_picked = int(input("Pick a spot: "))
+                except ValueError:
+                    print("Enter a number.")
+                    continue
+                if 1 <= spot_picked <= 9:
+                    spot_picked -= 1
+                    print()
+                else:
+                    print("Enter a valid number(1 - 9).\n")
+                    continue
+
+                if board[spot_picked] == operators[0] or board[spot_picked] == operators[1]:
+                    print("That spot is already picked!\n")
+                    continue
+                else:
+                    board[spot_picked] = operators[0]
+
+                break
+
+        if not is_turn:
+            while True:
+                bot_spot_picked = random.randint(0, 8)
+                if board[bot_spot_picked] == operators[0] or board[bot_spot_picked] == operators[1]:
+                    continue
+                else:
+                    board[bot_spot_picked] = operators[1]
+                    print(f"The bot picked {bot_spot_picked + 1}")
+
+                break
+
+        if is_turn:
+            is_turn = False
+        elif not is_turn:
+            is_turn = True
+
+
+def hangman():
+    word = random.choice(words).upper()
+    while ' ' in word or '-' in word:
+        word = random.choice(words).upper()
+
+    word_letters = set(word)
+    used_letters = set()
+    alphabet = set(string.ascii_uppercase)
+
+    while True:
+        try:
+            lives = int(input("How many lives: "))
+            print()
+            break
+        except ValueError:
+            print("Enter a valid number\n")
+
+    while True:
+        if lives == 0:
+            print("You ran out of lives!")
+            print(f"The correct word was: {word}")
+            input("Press any key to return to the menu.")
+            break
+
+        if len(word_letters) == 0:
+            print("You win!")
+            print(f"The word was: {word}!")
+            input("Press any key to return to the menu.")
+            break
+
+        print(f"Lives remaining: {lives}")
+
+        if len(used_letters) > 0:
+            print(f"Used letters:", ", ".join(sorted(used_letters)))
+
+        print("Current word: ", end="")
+        for letter in word:
+            if letter not in used_letters:
+                print("_ ", end="")
+            elif letter in used_letters:
+                print(f"{letter} ", end="")
+
+        print()
+        user_guess = input("Enter a letter: ").upper()
+        print()
+
+        if user_guess in alphabet - used_letters:
+            used_letters.add(user_guess)
+            if user_guess in word_letters:
+                word_letters.remove(user_guess)
+            else:
+                lives -= 1
+
+        elif user_guess in used_letters:
+            print(f"You've already guessed \"{user_guess}\"\n")
+
+        else:
+            print("Enter a valid letter.\n")
+
+
+def calculator():
+    while True:
+        try:
+            first_num = input("First number: ")
+            first_num = float(first_num)
+            if isinstance(first_num, float):
+                break
+        except ValueError:
+            print("Enter a valid number.\n")
+
+    while True:
+        try:
+            second_num = input("Second number: ")
+            second_num = float(second_num)
+            if isinstance(second_num, float):
+                break
+        except ValueError:
+            print("Enter a valid number.\n")
+
+    while True:
+        operator = input("Add, Subtract, Divide, Multiply, Power: ")
+        print()
+        if operator.lower() == "add" or operator.lower() == "subtract" or operator.lower() == "divide":
+            break
+        elif operator.lower() == "multiply" or operator.lower() == "power":
+            break
+        else:
+            print("Enter a valid operator.")
+            input("Press any key to continue.\n")
+
+    if operator == "add":
+        final_answer = first_num + second_num
+        print(f"{first_num} + {second_num} = {final_answer}")
+        input("Press any key to return to the menu.")
+        running = False
+    elif operator == "subtract":
+        final_answer = first_num - second_num
+        print(f"{first_num} - {second_num} = {final_answer}")
+        input("Press any key to return to the menu.")
+        running = False
+    elif operator == "multiply":
+        final_answer = first_num * second_num
+        print(f"{first_num} x {second_num} = {final_answer}")
+        input("Press any key to return to the menu.")
+        running = False
+    elif operator == "divide":
+        final_answer = first_num / second_num
+        print(f"{first_num} / {second_num} = {final_answer}")
+        input("Press any key to return to the menu.")
+        running = False
+    elif operator == "power":
+        final_answer = first_num ** second_num
+        print(f"{first_num} to the power of {second_num} = {final_answer}")
+        input("Press any key to return to the menu.")
+        running = False
+    else:
+        print("ERROR CODE 5")
+        input("Press any key to close.")
+        running = False
+
+
+if __name__ == "__main__":
+    while True:
+        menu_pick = menu()
+        print()
+        if menu_pick == 1:
+            tictactoe()
+        elif menu_pick == 2:
+            hangman()
+        elif menu_pick == 3:
+            calculator()
+        elif menu_pick == 4:
+            exit()
