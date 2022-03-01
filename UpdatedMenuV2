@@ -136,6 +136,8 @@ def tictactoe():
     board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     is_turn = first_second()
     operators = pick_operator()
+    user_win = False
+    bot_win = False
 
     while True:
 
@@ -144,31 +146,28 @@ def tictactoe():
         print(f"{board[6]} | {board[7]} | {board[8]}\n")
 
         if check_user_horizontals(board, operators[0]):
-            print("You won the game!")
-            input("Press any key to return to the menu.")
-            break
+            user_win = True
 
         if check_bot_horizontals(board, operators[1]):
-            print("You lost the game!")
-            input("Press any key to return to the menu.")
-            break
+            bot_win = True
 
         if check_user_diagonals(board, operators[0]):
-            print("You won the game!")
-            input("Press any key to return to the menu.")
-            break
+            user_win = True
 
         if check_bot_diagonals(board, operators[1]):
-            print("You lost the game!")
-            input("Press any key to return to the menu.")
-            break
+            bot_win = True
 
         if check_user_row(board, operators[0]):
+            user_win = True
+
+        if check_bot_row(board, operators[1]):
+            bot_win = True
+            
+        if user_win:
             print("You won the game!")
             input("Press any key to return to the menu.")
             break
-
-        if check_bot_row(board, operators[1]):
+        elif bot_win:
             print("You lost the game!")
             input("Press any key to return to the menu.")
             break
